@@ -25,7 +25,6 @@ INSERT INTO employee VALUES
 (107, 'Mohit', 75000, 3),
 (108, 'Simran', 55000, 3);
 
--- 1 ANS :- 
 SELECT
     d.dept_name AS department_name,
     e.emp_name AS employee_name,
@@ -43,9 +42,13 @@ AND (
     WHERE e3.dept_id = e.dept_id
 ) >= 3;
 
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------V
+SELECT d.dept_name FROM employee as e 
+join department as d on e.dept_id = d.dept_id
+where (
+    SELECT COUNT(*)
+    FROM employee AS e3
+    WHERE e3.dept_id = e.dept_id
+) >= 3; 
 
 --Q2:
 CREATE TABLE bank_customer (
@@ -61,10 +64,6 @@ CREATE TABLE customer_audit (
     action VARCHAR(20),
     action_time TIMESTAMP
 );
-
-INSERT INTO bank_customer VALUES
-(1, 'Rahul', 50000),
-(2, 'Neha', 75000);
 
 INSERT INTO bank_customer VALUES
 (1, 'Rahul', 50000),
@@ -91,3 +90,9 @@ CREATE TRIGGER customer_audit_trigger
 AFTER INSERT OR DELETE ON bank_customer
 FOR EACH ROW
 EXECUTE FUNCTION log_customer_changes();
+
+INSERT into bank_customer VALUES (3,'Rishav',50000);
+DELETE FROM bank_customer where customer_id = 3;
+
+SELECT * from customer_audit;
+
