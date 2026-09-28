@@ -42,13 +42,6 @@ AND (
     WHERE e3.dept_id = e.dept_id
 ) >= 3;
 
-SELECT d.dept_name FROM employee as e 
-join department as d on e.dept_id = d.dept_id
-where (
-    SELECT COUNT(*)
-    FROM employee AS e3
-    WHERE e3.dept_id = e.dept_id
-) >= 3; 
 
 --Q2:
 CREATE TABLE bank_customer (
